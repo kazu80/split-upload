@@ -1,0 +1,17 @@
+{
+  "name": "split-upload",
+  "authors": [
+    "Kazuyoshi Kawakami <saruyama.monki@gmail.com>"
+  ],
+  "description": "Upload file for big file.",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
