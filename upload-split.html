@@ -1,0 +1,219 @@
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
+<link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="upload-split">
+    <template>
+        <style>
+            :host {
+
+            }
+
+            #splitUploadFile {
+                visibility : hidden;
+                height     : 0;
+                margin     : 0;
+            }
+        </style>
+
+        <slot></slot>
+
+        <input type="file" name="file" id="splitUploadFile" on-change="changeFile">
+
+        <iron-ajax
+                id="ajax"
+                url=[[url]]
+                method=[[method]]
+                headers=[[headers]]
+                content-type=[[contentType]]
+                body=[[body]]
+                on-response="handleResponse"
+                debounce-duration="300"></iron-ajax>
+
+    </template>
+    <script>
+        class UploadSplit extends Polymer.Element {
+            static get is () { return 'upload-split'; }
+
+            static get properties () {
+                return {
+                    url         : {
+                        type : String,
+                        value: '',
+                    },
+                    method      : {
+                        type  : String,
+                        value : 'POST',
+                        notify: true,
+                    },
+                    headers     : {
+                        type : Object,
+                        value: {},
+                    },
+                    contentType : {
+                        type    : String,
+                        value   : 'application/octet-stream',
+                        readOnly: true,
+                    },
+                    body        : {
+                        type : Blob,
+                        value: null,
+                    },
+                    mime        : {
+                        type : String,
+                        value: null,
+                    },
+                    extention   : {
+                        type : String,
+                        value: null,
+                    },
+                    filename    : {
+                        type : String,
+                        value: null,
+                    },
+                    fileSize    : {
+                        type : Number,
+                        value: 0,
+                    },
+                    sendCount   : {
+                        type  : Number,
+                        value : 0,
+                        notify: true,
+                    },
+                    sendCountMax: {
+                        type  : Number,
+                        value : 0,
+                        notify: true,
+                    },
+                    limitSize   : {
+                        type : Number,
+                        value: 1024 * 1000 * 5,
+                    },
+                    isReady     : {
+                        type  : Boolean,
+                        value : false,
+                        notify: true,
+                    },
+                    splitSize   : {
+                        type : Number,
+                        value: 1024 * 1000 * 5, // 5MB
+                    },
+                };
+            }
+
+            changeFile () {
+                const files = this.$.splitUploadFile.files;
+
+                if (files.length < 1) {
+                    console.log ('not find file');
+                    this.isReady = false;
+                    return false;
+                }
+
+                const file = files[0];
+
+                this.sendCount = 0;
+                this.sendCountMax = Math.ceil (file.size / this.limitSize);
+
+                this.isReady = true;
+            }
+
+            uploadButtonClick () {
+                if (this.isReady) {
+                    // reset count
+                    this.sendCount = 0;
+                    this.sendCountMax = 0;
+
+                    // execute
+                    this.readBlob ();
+                }
+            }
+
+            choiceButtonClick () {
+                this.$.splitUploadFile.click ();
+            }
+
+            readBlob () {
+                const files = this.$.splitUploadFile.files;
+
+                if (files.length < 1) {
+                    console.error ('not find file');
+                    return false;
+                }
+
+                const file = files[0];
+
+                // set some parameter
+                this.mime = file['type'];
+                this.filename = file['name'];
+                this.fileSize = file['size'];
+                this.extension = UploadSplit.getExtensionFromFileName (this.filename);
+
+                // count of repeat
+                const chunks = Math.ceil (file.size / this.splitSize);
+                this.sendCountMax = chunks;
+
+                for (let i = 0; i < chunks; i++) {
+                    this.chunk (file, i, chunks);
+                }
+            }
+
+            /**
+             * Read file of split by chuck size
+             * @param {object} file - the upload file
+             * @param {Number} i
+             * @param {Number} chunks - size of upload
+             */
+            chunk (file, i, chunks) {
+                const reader = new FileReader ();
+
+                const start = i * this.splitSize;
+                const stop = start + this.splitSize;
+
+                const blob = file.slice (start, stop);
+
+                reader.onloadend = (evt) => {
+                    if (evt.target.readyState === FileReader.DONE) {
+                        const blob = evt.target.result;
+                        this.upload (blob, i, chunks - 1);
+                    }
+                };
+                reader.readAsArrayBuffer (blob);
+            }
+
+            upload (blob, id, maxId) {
+                // Default headers
+                const prepareHeaders = {
+                    'Chunk-Id'      : id,
+                    'Chunk-Max-Id'  : maxId,
+                    'File-Mime'     : this.mime,
+                    'File-Extension': this.extension,
+                };
+
+                // set headers
+                this.headers = Object.assign (prepareHeaders, this.headers);
+
+                // Data
+                this.body = blob;
+
+                this.$.ajax.generateRequest ();
+            }
+
+            handleResponse (res) {
+                this.sendCount++;
+
+                this.isReady = !UploadSplit.isFinish;
+            }
+
+            static isFinish () {
+                return (this.sendCountMax > 0 && this.sendCount === this.sendCountMax);
+            }
+
+            static getExtensionFromFileName (fileName) {
+                const re = /(?:\.([^.]+))?$/;
+                return re.exec (fileName)[1];
+            }
+        }
+
+        window.customElements.define (UploadSplit.is, UploadSplit);
+    </script>
+</dom-module>
