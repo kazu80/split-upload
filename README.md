@@ -1,7 +1,22 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
 
-# split-upload
-TODO: Write a project description
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="./split-upload.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+
+```html
+<link rel="import" href="./split-upload.html">
+```
+
+# <split-upload>
+This is polymer element to upload file for big file.
 
 ## Installation
 TODO: Describe the installation process
