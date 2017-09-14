@@ -4,12 +4,16 @@
     "Kazuyoshi Kawakami <saruyama.monki@gmail.com>"
   ],
   "keywords": [
+    "web-component",
     "web-components",
     "polymer",
     "input",
+    "upload",
+    "file upload",
+    "split",
     "file"
   ],
-  "description": "Upload file for big file.",
+  "description": "This is polymer element to upload file for big file.",
   "main": "split-upload.html",
   "repository": {
     "type": "git",
