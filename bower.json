@@ -10,7 +10,7 @@
     "file"
   ],
   "description": "Upload file for big file.",
-  "main": "index.html",
+  "main": "split-upload.html",
   "repository": {
     "type": "git",
     "url": "git://github.com/monkick/split-upload.git"
