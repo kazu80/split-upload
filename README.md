@@ -1,5 +1,7 @@
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
 
+### Inline Demo
+
 <!--
 ```
 <custom-element-demo>
@@ -12,14 +14,39 @@
 -->
 
 ```html
-<link rel="import" href="./split-upload.html">
+            <upload-split
+                    id="uploadSplit"
+                    url="http://localhost/"
+                    send-count={{sendCount}}
+                    send-count-max={{sendCountMax}}
+            >
+                uploaded count : [[sendCount]]<br>
+                upload count : [[sendCountMax]]<br>
+                
+                <button on-click="choice">choice file</paper-button>
+                <button on-click="btnClick">upload</button>
+            </upload-split>
+            
+            <script>
+                function choice () {
+                    const split = document.getElementById ('uploadSplit');
+                    split.choiceButtonClick ();
+                }
+            
+                function upload () {
+                    const split = document.getElementById ('uploadSplit');
+                    split.uploadButtonClick ();
+                }
+            </script>
 ```
 
 # <split-upload>
-This is polymer element to upload file for big file.
+This is polymer element to split and upload large file.
 
 ## Installation
-TODO: Describe the installation process
+```
+$ bower install --save monkick/split-upload
+```
 
 ## Usage
 
