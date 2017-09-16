@@ -40,8 +40,8 @@
             </script>
 ```
 
-# <split-upload>
-This is polymer element to split and upload large file.
+# :smiley_cat: <split-upload>
+This is polymer element to split and upload large file :clap:
 
 ## Installation
 ```
@@ -50,19 +50,37 @@ $ bower install --save monkick/split-upload
 
 ## Usage
 
-header
+At first. Import it at header.
+At the same time. Import `paper-button` at header.
 
-```
-    <link rel="import" href="../bower_components/paper-button/paper-button.html">
+```html
     <link rel="import" href="../bower_components/split-upload/split-upload.html">
+    <link rel="import" href="../bower_components/paper-button/paper-button.html">
 ```
 
+Next. Add the `upload-split` custom tag in body.
+:scream_cat: I'm sorry. The custom tag name is not file name...
 
-following
+```html
+    <upload-split id="uploadSplit" url="..."></upload-split>
+```
+
+The `url` argument is destination of upload. The upload url write here.
+
+Next. Add twice buttons in `upload-split` tag for choice and execute.
+The `upload-split` tag has methods for file choose and file upload. 
+
+```html
+    <upload-split id="uploadSplit" url="/foo/bar.php">
+        <button onClick="choice()">choice</button>
+        <button onClick="upload()">upload</button>
+    </upload-split>
+```
+
+Next. Add script tag in body.
+Write some code for choose file and file upload. 
 
 ```
-...
-
     <upload-split id="uploadSplit" url="http://[...]/">
         <button onClick="choice()">choice</button>
         <button onClick="upload()">upload</button>
@@ -80,3 +98,8 @@ following
         }
     </script>
 ```
+
+`choiceButtonClick` is choose file method.
+`uploadButtonClick` is upload file method.
+
+That's all :tada:
