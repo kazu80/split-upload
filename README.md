@@ -59,7 +59,7 @@ At the same time. Import `paper-button` at header.
 ```
 
 Next. Add the `upload-split` custom tag in body.  
-:scream_cat: I'm sorry. The custom tag name is not file name...  
+:scream_cat: I'm sorry. The custom tag name is not same file name...  
 
 ```html
     <upload-split id="uploadSplit" url="..."></upload-split>
@@ -103,3 +103,24 @@ Write some code for choose file and file upload.
 `uploadButtonClick` is upload file method.  
   
 That's all :tada:
+
+## Feature
+
+Content-Type use application/octet-stream  
+Split size is 5MB.  
+
+## parameter
+ 
+sendCount : sent count  
+sendCountMax : send count  
+  
+Use like this  
+
+```html
+    <upload-split id="uploadSplit" url="http://[...]/">
+        sent count : [[sendCount]] / [[sendCountMax]]
+        
+        <button onClick="choice()">choice</button>
+        <button onClick="upload()">upload</button>
+    </upload-split>
+```
