@@ -1,0 +1,21 @@
+{
+  "name": "demo",
+  "homepage": "https://github.com/monkick/split-upload",
+  "authors": [
+    "Kazuyoshi Kawakami <saruyama.monki@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "split-upload": "monkick/split-upload#^1.0.2"
+  }
+}
