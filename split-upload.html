@@ -181,6 +181,7 @@
             }
 
             upload (blob, id, maxId) {
+
                 // Default headers
                 const prepareHeaders = {
                     'Chunk-Id'      : id,
@@ -195,7 +196,11 @@
                 // Data
                 this.body = blob;
 
+                // Send Request
                 this.$.ajax.generateRequest ();
+
+                // initialize header property
+                this.headers = {};
             }
 
             handleResponse (res) {
