@@ -38,7 +38,8 @@
 ```
 
 # :smiley_cat: split-upload
-This is polymer element to split and upload large file :clap:
+This is polymer element to split and upload large file :clap:  
+It is mainly intended for use when uploading video files
 
 ## Installation
 ```
@@ -149,5 +150,6 @@ If you want change to the port. Please edit `upload-split` tag's url parameter.
 $ vi index.html
 ```  
 
-Let's open `index.html` by your browser.
+Let's open `index.html` by your browser.  
+  
 thank you :smiley_cat:
