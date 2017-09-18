@@ -3,7 +3,7 @@
 ### Inline Demo
 
 <!--
-```
+```html
 <custom-element-demo>
   <template>
     <link rel="import" href="./split-upload.html">
@@ -20,9 +20,6 @@
                     send-count={{sendCount}}
                     send-count-max={{sendCountMax}}
             >
-                uploaded count : [[sendCount]]<br>
-                upload count : [[sendCountMax]]<br>
-                
                 <button on-click="choice">choice file</paper-button>
                 <button on-click="btnClick">upload</button>
             </upload-split>
@@ -80,8 +77,8 @@ The `upload-split` tag has methods for file choose and file upload.
 Next. Add script tag in body.  
 Write some code for choose file and file upload.  
 
-```
-    <upload-split id="uploadSplit" url="http://[...]/">
+```html
+    <upload-split id="uploadSplit" url="[...]">
         <button onClick="choice()">choice</button>
         <button onClick="upload()">upload</button>
     </upload-split>
@@ -117,10 +114,40 @@ sendCountMax : send count
 Use like this  
 
 ```html
-    <upload-split id="uploadSplit" url="http://[...]/">
+    <upload-split id="uploadSplit" url="[...]">
         sent count : [[sendCount]] / [[sendCountMax]]
         
         <button onClick="choice()">choice</button>
         <button onClick="upload()">upload</button>
     </upload-split>
 ```
+
+## DEMO
+
+I prepared demos for client side and server side.  
+
+> Server side:  
+
+I made example code with php.  
+If you want make by different code. Reference it
+
+```
+$ cd demo/server
+$ php -S localhost:8006 -t ./  
+```
+
+> Client side
+
+```
+$ cd demo/client
+$ bower install
+```
+
+If you want change to the port. Please edit `upload-split` tag's url parameter. 
+
+```
+$ vi index.html
+```  
+
+Let's open `index.html` by your browser.
+thank you :smiley_cat:

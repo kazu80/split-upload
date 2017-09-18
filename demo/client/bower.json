@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "split-upload": "monkick/split-upload#^1.0.2"
+    "split-upload": "monkick/split-upload#^1.0.3"
   }
 }
