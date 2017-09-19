@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>split-update</title>
+
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./split-upload.html">
+
+    <style>
+        .main {
+            margin : 20px;
+        }
+
+        .blue {
+            color            : #ffffff;
+            background-color : #3f51b5;
+        }
+
+        .red {
+            color            : #ffffff;
+            background-color : #f44336;
+        }
+    </style>
+</head>
+<body>
+
+<main class="main">
+    <h1>upload-split DEMO</h1>
+    <upload-split id="uploadSplit" url="http://localhost:8006/">
+        <paper-button raised class="blue" onClick="choice()">choice</paper-button>
+        <paper-button raised class="red" onClick="upload()">upload</paper-button>
+    </upload-split>
+</main>
+
+<script>
+    function choice () {
+        const split = document.getElementById ('uploadSplit');
+        split.choiceButtonClick ();
+    }
+
+    function upload () {
+        const split = document.getElementById ('uploadSplit');
+        split.uploadButtonClick ();
+    }
+</script>
+
+</body>
+</html>
