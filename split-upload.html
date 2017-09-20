@@ -197,12 +197,17 @@
                 this.body = blob;
 
                 // Send Request
-                this.$.ajax.generateRequest ();
+                const request = this.$.ajax.generateRequest ();
 
                 // initialize header property
                 this.headers = {};
+
+                return request;
             }
 
+            /**
+             * @param res
+             */
             handleResponse (res) {
                 this.sendCount++;
 
